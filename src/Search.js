@@ -48,7 +48,26 @@ class Search extends Component {
   }
 
   setPage = (event) => {
-    this.setState(  { page: this.state })
+    let page = this.state.page;
+    if (event.target.id === 'next') {
+      page++;
+    } else if (event.target.id === 'prev') {
+      page = page > 1 ? page - 1 : page;
+    } else {
+      page = event.target.innerText;
+    }
+    this.setState({ page: page }, this.searchCats);
+  }
+
+  renderPageButtons() {
+    let pages = [];
+    if (this.state.cats.length > 0) {
+      pages.push(<button id="prev" key="prev" onClick={this.setPage}>Anterior</button>);
+      let startPage = this.state.page < 5 ? 1 : this.state.page - 2;
+      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage}>{i}</button>);
+      pages.push(<button id="next" key="next" onClick={this.setPage}>Siguiente</button>);
+    }
+    return pages;
   }
 
   render() {
@@ -65,8 +84,9 @@ class Search extends Component {
           <option>25</option>
         </select>
         <Gallery cats={this.state.cats} />
-        <button id="prev" onClick={this.setPage}>Anterior</button>
-        <button id="next" onClick={this.setPage}>Siguiente</button>
+        <div className="pages">
+          {this.renderPageButtons()}
+        </div>
       </div>
     )
   }
