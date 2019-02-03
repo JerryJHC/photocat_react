@@ -34,12 +34,21 @@ class Search extends Component {
   searchCats = () => {
     let searchURL = catURL.replace('<limit>', this.state.limit).replace('<page>', this.state.page).replace('<category>', document.getElementById("categories").selectedOptions[0].value);
     ajax('GET', searchURL).then(this.setCats).catch(() => console.log("Error : AJAX CATS"));
+    console.log(searchURL);
   }
 
   renderOption(category) {
     return (
-      <option value={category.id}>{category.name}</option>
+      <option key={category.id} value={category.id}>{category.name}</option>
     );
+  }
+
+  setLimit = (event) => {
+    this.setState({ limit: event.target.selectedOptions[0].value });
+  }
+
+  setPage = (event) => {
+    this.setState(  { page: this.state })
   }
 
   render() {
@@ -50,7 +59,14 @@ class Search extends Component {
           {this.state.categories.map(this.renderOption)}
         </select>
         <button onClick={this.searchCats}>Search</button>
+        <select id="limits" onChange={this.setLimit}>
+          <option>5</option>
+          <option>10</option>
+          <option>25</option>
+        </select>
         <Gallery cats={this.state.cats} />
+        <button id="prev" onClick={this.setPage}>Anterior</button>
+        <button id="next" onClick={this.setPage}>Siguiente</button>
       </div>
     )
   }
