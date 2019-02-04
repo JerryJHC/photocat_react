@@ -10,7 +10,7 @@ class Search extends Component {
       categories: [],
       cats: [],
       limit: 5,
-      page: 1
+      page: 0
     }
     ajax('GET', categoriesURL).then(this.setCategories).catch(() => console.log("Error : AJAX CATEGORIES"));
   }
@@ -51,7 +51,7 @@ class Search extends Component {
     if (event.target.id === 'next') {
       page++;
     } else if (event.target.id === 'prev') {
-      page = page > 1 ? page - 1 : page;
+      page = page > 0 ? page - 1 : page;
     } else {
       page = parseInt(event.target.innerText);
     }
@@ -60,10 +60,10 @@ class Search extends Component {
 
   renderPageButtons() {
     let pages = [];
-    if (this.state.cats.length > 0 || this.state.page > 1) {
+    if (this.state.cats.length > 0 || this.state.page > 0) {
       pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
       let startPage = this.state.page < 5 ? 1 : this.state.page - 2;
-      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
+      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page +1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
       pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
     }
     return pages;
