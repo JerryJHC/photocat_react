@@ -1,16 +1,20 @@
-img{
-  max-width: 400px;
-  max-height: 500px;
+body{
+  background-color: antiquewhite;
 }
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+.imageContainer{
+  width: 220px;
+  height: 220px;
+  background-color: gray;
+  padding: 20px;
+  margin: 10px;
 }
 
-.images > div {
-  flex: 0 0 auto;
-  padding: 50px;
+.imageContainer > img{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+button{
+  margin: 10px;
 }
