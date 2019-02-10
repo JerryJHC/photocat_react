@@ -1,25 +1,25 @@
-##GitHub Pages
+## GitHub Pages
 https://jerryjhc.github.io/photocat_react/
 
-#Tecnologías empleadas
+# Tecnologías empleadas
 
-##Rest API JSON Server
+## Rest API JSON Server
 Se ha creado un archivo json que contiene las categorias de la API de gatos:
 https://my-json-server.typicode.com/JerryJHC/DBJsonServer/categories
 
-##Vanilla Javascript
+## Vanilla Javascript
 Las peticiones a los servidores de API tanto de JSON Server como de https://api.thecatapi.com/ se realizan utilizando HttpRequest y esperando por el response
 
-##Promises
+## Promises
 El response de vanilla se trabaja a través de la generación de promises con la que se realizan las posteriores ejecuciones como son generar las categorias o generar la galeria con cada uno de los gatos obtenidos en la petición.
 
-##Async/await
+## Async/await
 Ya que se trabaja con React en algunas ocasiones se emplea async/await para el cambio de un estado.
 
-##React
+## React
 Todo el frontend se ha realizado empleando React, trabajando con componentes para la busqueda, la galeria y las imagenes.
 
-#React
+# React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
