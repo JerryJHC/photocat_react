@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
+import Image from './Image'
 
 class Gallery extends Component {
 
     renderImage(cat) {
         return (
             <div key={cat.id} className="imageContainer d-flex justify-content-around align-content-between ">
-                <span id={cat.id} className="spinner-border text-warning"></span>
-                <img src={cat.url} alt={cat.id} />
+                <Image cat={cat} />
             </div>
         );
     }
