@@ -36,7 +36,7 @@ class Search extends Component {
   searchCats = async () => {
     let category = document.getElementById("categories").selectedOptions[0].value;
     if (this.state.currentCategory != category) {
-      await this.setState({ currentCategory: category , page: 0 });
+      await this.setState({ currentCategory: category, page: 0 });
     }
     if (this.state.currentLimit != this.state.limit) {
       await this.setState({ currentLimit: this.state.limit, page: 0 });
@@ -62,7 +62,7 @@ class Search extends Component {
     } else if (event.target.id === 'prev') {
       page = page > 0 ? page - 1 : page;
     } else {
-      page = parseInt(event.target.innerText);
+      page = parseInt(event.target.innerText) -1;
     }
     this.setState({ page: page }, this.searchCats);
   }
@@ -70,10 +70,14 @@ class Search extends Component {
   renderPageButtons() {
     let pages = [];
     if (this.state.cats.length > 0 || this.state.page > 0) {
-      pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
-      let startPage = this.state.page < 5 ? 1 : this.state.page - 2;
+      if (this.state.page > 0) {
+        pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
+      }
+      let startPage = this.state.page < 5 ? 1 : this.state.page - 3;
       for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page + 1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
-      pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
+      if (this.state.page + 1 < maxCats / this.state.limit) {
+        pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
+      }
     }
     return pages;
   }
@@ -90,7 +94,7 @@ class Search extends Component {
         <select id="limits" onChange={this.setLimit}>
           <option>5</option>
           <option>10</option>
-          <option>25</option>
+          <option>20</option>
         </select>
         <Gallery cats={this.state.cats} />
         <div className="pages d-flex justify-content-center">
@@ -103,5 +107,6 @@ class Search extends Component {
 
 const categoriesURL = 'https://my-json-server.typicode.com/JerryJHC/DBJsonServer/categories';
 const catURL = 'https://api.thecatapi.com/v1/images/search?api_key=98d6679f-e35f-4cbc-8a91-85f3e93af700&limit=<limit>&page=<page>&order=Desc&category_ids=<category>';
+const maxCats = 100;
 
 export default Search;
