@@ -10,7 +10,9 @@ class Search extends Component {
       categories: [],
       cats: [],
       limit: 5,
-      page: 0
+      page: 0,
+      currentLimit: 5,
+      currentCategory: 0
     }
     ajax('GET', categoriesURL).then(this.setCategories).catch(() => console.log("Error : AJAX CATEGORIES"));
   }
@@ -31,8 +33,15 @@ class Search extends Component {
     }
   }
 
-  searchCats = () => {
-    let searchURL = catURL.replace('<limit>', this.state.limit).replace('<page>', this.state.page).replace('<category>', document.getElementById("categories").selectedOptions[0].value);
+  searchCats = async () => {
+    let category = document.getElementById("categories").selectedOptions[0].value;
+    if (this.state.currentCategory != category) {
+      await this.setState({ currentCategory: category , page: 0 });
+    }
+    if (this.state.currentLimit != this.state.limit) {
+      await this.setState({ currentLimit: this.state.limit, page: 0 });
+    }
+    let searchURL = catURL.replace('<limit>', this.state.limit).replace('<page>', this.state.page).replace('<category>', category);
     ajax('GET', searchURL).then(this.setCats).catch(() => console.log("Error : AJAX CATS"));
   }
 
@@ -63,7 +72,7 @@ class Search extends Component {
     if (this.state.cats.length > 0 || this.state.page > 0) {
       pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
       let startPage = this.state.page < 5 ? 1 : this.state.page - 2;
-      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page +1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
+      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page + 1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
       pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
     }
     return pages;
