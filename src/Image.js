@@ -9,10 +9,12 @@ class Image extends Component {
         };
     }
 
+    //Si la imagen se ha cargado marca el estado
     loaded = () => {
         this.setState({ loading: false });
     }
 
+    //Genera la vista de la imagen y el span si esta cargando la imagen
     render() {
         let cat = this.props.cat;
         let view = [];
