@@ -1,11 +1,15 @@
-function ajax(method,url) {
+function ajax(method, url, header) {
 
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open(method, url);
         xhr.onload = function () {
             if (this.status >= 200 && this.status < 300) {
-                resolve(xhr.response);
+                if (header != null) {
+                    resolve([xhr.response , xhr.getResponseHeader("Pagination-Count")]);
+                } else {
+                    resolve(xhr.response);
+                }
             } else {
                 reject({
                     status: this.status,

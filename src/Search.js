@@ -13,7 +13,8 @@ class Search extends Component {
       page: 0,
       currentLimit: 5,
       currentCategory: 0,
-      loading: true
+      loading: true,
+      maxCats: 0
     }
     //Hace la peticion al servidor en busca de las categorias
     ajax('GET', categoriesURL).then(this.setCategories).catch(() => console.log("Error : AJAX CATEGORIES"));
@@ -29,9 +30,12 @@ class Search extends Component {
   }
 
   //recibe el JSON con los gatos de la API y genera la coleccion
-  setCats = (jsonString) => {
+  setCats = async (response) => {
     try {
-      this.setState({ cats: JSON.parse(jsonString) });
+      if (this.state.maxCats !== response[1]) {
+        await this.setState({ maxCats: parseInt(response[1]) });
+      }
+      this.setState({ cats: JSON.parse(response[0]) });
     } catch{
       console.log("Error: Parse JSON");
     }
@@ -50,7 +54,7 @@ class Search extends Component {
     }
     //Genera la uri y realiza la peticion de imagenes
     let searchURL = catURL.replace('<limit>', this.state.limit).replace('<page>', this.state.page).replace('<category>', category);
-    ajax('GET', searchURL).then(this.setCats).catch(() => console.log("Error : AJAX CATS"));
+    ajax('GET', searchURL, true).then(this.setCats).catch(() => console.log("Error : AJAX CATS"));
   }
 
   //Genera el option de cada categoria
@@ -86,10 +90,11 @@ class Search extends Component {
       if (this.state.page > 0) {
         pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
       }
-      let startPage = this.state.page < 5 ? 1 : this.state.page - 3;
-      for (let i = startPage; i < startPage + 5; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page + 1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
+      let factor = this.state.maxCats / this.state.limit > 5 ? 5 : this.state.maxCats / this.state.limit ;
+      let startPage = this.state.page < factor ? 1 : this.state.page - 3;
+      for (let i = startPage; i < startPage + factor; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page + 1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
       //Si es la ultima pagina no muestra el boton de siguiente
-      if (this.state.page + 1 < maxCats / this.state.limit) {
+      if (this.state.page + 1 < this.state.maxCats / this.state.limit) {
         pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
       }
     }
@@ -100,7 +105,7 @@ class Search extends Component {
     //Si esta cargando las categorias muestra un spinner
     if (this.state.loading) {
       return (
-        <div class="center-block">
+        <div className="center-block">
           <span key="loading" className="spinner-grow text-warning m-5"></span>
         </div>
       );
@@ -132,6 +137,5 @@ class Search extends Component {
 //URLs y maximo de gatos
 const categoriesURL = 'https://my-json-server.typicode.com/JerryJHC/DBJsonServer/categories';
 const catURL = 'https://api.thecatapi.com/v1/images/search?api_key=98d6679f-e35f-4cbc-8a91-85f3e93af700&limit=<limit>&page=<page>&order=Desc&category_ids=<category>';
-const maxCats = 100;
 
 export default Search;
