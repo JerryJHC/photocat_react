@@ -7,7 +7,7 @@ class Modal extends Component {
         let cat = this.props.cat;
         return (
             <div className="modal" key={"m_" + cat.id}>
-                <span key={"ms_"+cat.id} className="close">&times;</span>
+                <span key={"ms_" + cat.id} className="close" onClick={this.props.handler}>&times;</span>
                 <img className="modal-content" key={"mi_" + cat.id} src={cat.url} alt={cat.id} />
             </div>
         );

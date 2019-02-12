@@ -21,6 +21,11 @@ class Image extends Component {
         this.setState({ show: true });
     }
 
+    //Oculta el modla
+    hide = () => {
+        this.setState({ show: false });
+    }
+
     //Genera la vista de la imagen y el span si esta cargando la imagen
     render() {
         let cat = this.props.cat;
@@ -31,7 +36,7 @@ class Image extends Component {
         }
         view.push(<img key={"img_"+cat.id} src={cat.url} alt={cat.id} onLoad={this.loaded} onClick={this.show} />);
         if (this.state.show) {
-            view.push(<Modal key={"Modal_"+cat.id} cat={cat} />);
+            view.push(<Modal key={"Modal_"+cat.id} cat={cat} handler={this.hide} />);
         }
         return view;
     }
