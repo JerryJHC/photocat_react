@@ -1,13 +1,13 @@
 {
-  "main.css": "/photocat_react/static/css/main.f3327fba.chunk.css",
-  "main.js": "/photocat_react/static/js/main.c99af573.chunk.js",
-  "main.js.map": "/photocat_react/static/js/main.c99af573.chunk.js.map",
+  "main.css": "/photocat_react/static/css/main.3d69c60a.chunk.css",
+  "main.js": "/photocat_react/static/js/main.e82d955e.chunk.js",
+  "main.js.map": "/photocat_react/static/js/main.e82d955e.chunk.js.map",
   "static/js/1.fea9c8b3.chunk.js": "/photocat_react/static/js/1.fea9c8b3.chunk.js",
   "static/js/1.fea9c8b3.chunk.js.map": "/photocat_react/static/js/1.fea9c8b3.chunk.js.map",
   "runtime~main.js": "/photocat_react/static/js/runtime~main.a35b0eb5.js",
   "runtime~main.js.map": "/photocat_react/static/js/runtime~main.a35b0eb5.js.map",
-  "static/css/main.f3327fba.chunk.css.map": "/photocat_react/static/css/main.f3327fba.chunk.css.map",
+  "static/css/main.3d69c60a.chunk.css.map": "/photocat_react/static/css/main.3d69c60a.chunk.css.map",
   "index.html": "/photocat_react/index.html",
-  "precache-manifest.120b232f8d7d36a2deaab4da25858bc3.js": "/photocat_react/precache-manifest.120b232f8d7d36a2deaab4da25858bc3.js",
+  "precache-manifest.a696bf9d38216c0d55d948f9a0cf3bde.js": "/photocat_react/precache-manifest.a696bf9d38216c0d55d948f9a0cf3bde.js",
   "service-worker.js": "/photocat_react/service-worker.js"
 }
