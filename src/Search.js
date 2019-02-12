@@ -90,13 +90,15 @@ class Search extends Component {
       if (this.state.page > 0) {
         pages.push(<button id="prev" key="prev" onClick={this.setPage} className="btn btn-info">Anterior</button>);
       }
-      let factor = this.state.maxCats / this.state.limit > 5 ? 5 : this.state.maxCats / this.state.limit ;
+      let factor = this.state.maxCats / this.state.limit > 5 ? 5 : this.state.maxCats / this.state.limit;
       let startPage = this.state.page < factor ? 1 : this.state.page - 3;
       for (let i = startPage; i < startPage + factor; i++) pages.push(<button key={i} onClick={this.setPage} className={this.state.page + 1 === i ? "btn btn-success" : "btn btn-link"}>{i}</button>);
       //Si es la ultima pagina no muestra el boton de siguiente
       if (this.state.page + 1 < this.state.maxCats / this.state.limit) {
         pages.push(<button id="next" key="next" onClick={this.setPage} className="btn btn-info">Siguiente</button>);
       }
+      //Informacion de las paginas
+      pages.push(<div key="page-info" className="page-info">Mostrando página {this.state.page + 1} de {Math.ceil(this.state.maxCats / this.state.currentLimit)}</div>);
     }
     return pages;
   }
