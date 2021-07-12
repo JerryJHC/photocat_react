@@ -21,9 +21,10 @@ class Search extends Component {
   }
 
   //recibe el JSON de categorias y coloca loading a false para mostrar el buscador
-  setCategories = (jsonString) => {
+  setCategories = async (jsonString) => {
     try {
-      this.setState({ categories: JSON.parse(jsonString), loading: false });
+      await this.setState({ categories: JSON.parse(jsonString), loading: false });
+      await this.searchCats(); // First search
     } catch{
       console.log("Error: Parse JSON");
     }
