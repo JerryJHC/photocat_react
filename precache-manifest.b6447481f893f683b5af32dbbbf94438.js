@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "0045a64337493c162133",
-    "url": "/photocat_react/static/css/main.2817b751.chunk.css"
+    "revision": "a5f0c03830471f4dc901",
+    "url": "/photocat_react/static/css/main.6e66137f.chunk.css"
   },
   {
-    "revision": "0045a64337493c162133",
-    "url": "/photocat_react/static/js/main.0045a643.chunk.js"
+    "revision": "a5f0c03830471f4dc901",
+    "url": "/photocat_react/static/js/main.a5f0c038.chunk.js"
   },
   {
     "revision": "fea9c8b34d6e3b807e18",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/photocat_react/static/js/runtime~main.a35b0eb5.js"
   },
   {
-    "revision": "1bdae77690c5fcb47ca8084eecb5755e",
+    "revision": "f810c6e423733d06bbd49838046d1aa0",
     "url": "/photocat_react/index.html"
   }
 ];
